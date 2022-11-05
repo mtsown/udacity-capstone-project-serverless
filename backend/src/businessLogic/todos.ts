@@ -20,6 +20,12 @@ export async function getTodosForUser(userId: string): Promise<TodoItem[]> {
   return todoAccess.getTodos(userId);
 }
 
+export async function getTodo(userId: string, todoId: string): Promise<TodoItem> {
+  logger.info('Business logic - Getting Todo for user: ' + userId);
+
+  return todoAccess.getTodo(userId, todoId);
+}
+
 export async function createTodo(userId: string, newTodoData: CreateTodoRequest): Promise<TodoItem> {
   logger.info('Business logic - Creating Todo for user: ' + userId);
 
