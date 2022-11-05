@@ -17,6 +17,20 @@ export async function getTodos(idToken: string): Promise<Todo[]> {
   return response.data.todoList
 }
 
+export async function getTodo(todoId: string, idToken: string): Promise<Todo> {
+  console.log('Fetching todo')
+  console.log(idToken)
+
+  const response = await Axios.get(`${apiEndpoint}/todo/${todoId}`, {
+    headers: {
+      'Content-Type': 'application/json',
+      'Authorization': `Bearer ${idToken}`
+    },
+  })
+
+  return response.data.todo
+}
+
 export async function createTodo(
   idToken: string,
   newTodo: CreateTodoRequest

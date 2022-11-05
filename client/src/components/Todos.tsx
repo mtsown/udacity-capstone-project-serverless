@@ -17,6 +17,7 @@ import {
 import { createTodo, deleteTodo, getTodos, patchTodo } from '../api/todos-api'
 import Auth from '../auth/Auth'
 import { Todo } from '../types/Todo'
+import { Link, Route, Router, Switch } from 'react-router-dom'
 
 interface TodosProps {
   auth: Auth
@@ -169,7 +170,7 @@ export class Todos extends React.PureComponent<TodosProps, TodosState> {
                 />
               </Grid.Column>
               <Grid.Column width={10} verticalAlign="middle">
-                {todo.name}
+                <Link to={`/todo/${todo.todoId}`}>{todo.name}</Link>
               </Grid.Column>
               <Grid.Column width={3} floated="right">
                 {todo.dueDate}

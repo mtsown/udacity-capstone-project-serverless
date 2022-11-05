@@ -33,6 +33,24 @@ export class TodosAccess {
     return result.Items as TodoItem[];
   }
 
+  async getTodo(userId: string, todoId: string): Promise<TodoItem> {
+    logger.info('DataLayer - Getting Todo for user: ' + userId);
+
+    const result = await this.docClient
+      .query({
+        TableName: this.todosTable,
+        KeyConditionExpression: 'userId = :userId AND todoId = :todoId',
+        ExpressionAttributeValues: {
+          ':userId': userId,
+          ':todoId': todoId
+        }
+      })
+      .promise();
+    const todoItem = result.Items[0];
+
+    return todoItem as TodoItem;
+  }
+
   async createTodo(newTodo: TodoItem): Promise<TodoItem> {
     logger.info('DataLayer - Creating Todo');
     await this.docClient
